@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^detail/(?P<my_args>\d{1,2})/$',views.detail, name='detail'),
     url(r'^time/$',views.current_datetime, name='time'),
     url(r'^time/plus/(\d{1,2})/$', views.hours_ahead, name='time_plus'),
+    url(r'^order/$', views.order_confirmation),
 ]
