@@ -1,5 +1,7 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+#from django.template import Context
+#from django.template.loader import get_template
+from django.shortcuts import render, render_to_response
 
 import datetime
 
@@ -28,9 +30,18 @@ def hours_ahead(request, offset):
     return HttpResponse(html)
 
 def order_confirmation(request):
+    """
     context = {}
     context['customer_name'] = 'Kai'
     context['order_number'] = '110-4158206-7371406'
     context['item_list'] = {'Filco Ninja Majestouch-2','Cherry','CM Storm QuickFire'}
     context['express_delivery'] = True
-    return render(request, 'order_confirmation.html', context)
+    #return render(request, 'order_confirmation.html', context)
+    return render_to_response('order_confirmation.html', context)
+    """
+    customer_name = 'Kai'
+    order_number = '110-4158206-7371406'
+    item_list = {'Filco Ninja Majestouch-2','Cherry','CM Storm QuickFire'}
+    express_delivery = True
+    #return render_to_response( 'order_confirmation.html', locals() )
+    return render(request, 'order_confirmation.html', locals())

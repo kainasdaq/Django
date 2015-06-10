@@ -14,7 +14,7 @@
 
 	<ul>
 		{% for item in item_list %}
-		<li>{{ item }}</li>
+		<li>{{ forloop.counter }} {{ item }}</li>
 		{% empty %}
 		<li>There are no item</li>
 		{% endfor %}
