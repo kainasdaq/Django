@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}db list{% endblock %}
+
+{% block content %}
+<p>Item(s) list:</p>
+<ul>
+	{% for item in names %}
+	<li>{{ forloop.counter }} {{ item }}</li>
+	{% empty %}
+	<li>There are no item</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

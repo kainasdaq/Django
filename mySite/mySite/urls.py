@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^time/$',views.current_datetime, name='time'),
     url(r'^time/plus/(\d{1,2})/$', views.hours_ahead, name='time_plus'),
     url(r'^order/$', views.order_confirmation),
+    url(r'^keyboard/$', views.db_keyboard),
 ]
