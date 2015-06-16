@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}db list{% endblock %}
+
+{% block content %}
+<h3>Data is from PostgreSQL</h3>
+<p>Item(s) list:</p>
+<ul>
+	{% for item in names %}
+	<li>{{ forloop.counter }} {{ item }}</li>
+	{% empty %}
+	<li>There are no item</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

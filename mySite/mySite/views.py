@@ -4,7 +4,6 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, render_to_response
 
 import datetime
-import psycopg2 # PostgreSQL
 
 def hello(request):
     context = {}
@@ -52,13 +51,5 @@ def order_confirmation(request):
     express_delivery = True
     # when using locals(), local variables' names must match those var in the template!
     #return render_to_response( 'order_confirmation.html', locals() )
-    return rnder(request, 'order_confirmation.html', locals())
+    return render(request, 'order_confirmation.html', locals())
 
-def db_keyboard(request):
-    db = psycopg2.connect(user='kai', dbname='kai_db', password='zxcvbnm', host='localhost')
-    #db = psycopg2.connect()
-    cursor = db.cursor()
-    cursor.execute('SELECT name FROM keyboard ORDER BY name')
-    names = [row[0] for row in cursor.fetchall()]
-    db.close()
-    return render_to_response('db_list.html', {'names': names})

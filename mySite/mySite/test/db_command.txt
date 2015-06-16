@@ -1,0 +1,13 @@
+CREATE TABLE keyboard (
+	id serial PRIMARY KEY,
+	name varchar (50) NOT NULL, 
+	type varchar (50) check (type in ('Mechanical', 'Electrostatic Capacitive')),
+	color varchar (25) NOT NULL,
+	price real NOT NULL,
+	CONSTRAINT keyboard_pkey PRIMARY KEY (id)
+);
+
+
+INSERT INTO keyboards_keyboard (name, type, color, price) VALUES ('Filco Ninja Majestouch-2','Mechanical','Black',145.8);
+INSERT INTO keyboards_keyboard (name, type, color, price) VALUES ('CM Storm QuickFire','Mechanical','Black',85.0);
+INSERT INTO keyboards_keyboard (name, type, color, price) VALUES ('Happy Hacking Keyboard Professional2','Electrostatic Capacitive','Gray',244.9);
