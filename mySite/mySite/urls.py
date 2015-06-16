@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^time/plus/(\d{1,2})/$', views.hours_ahead, name='time_plus'),
     url(r'^order/$', views.order_confirmation),
 
-    url(r'^keyboards/$', include('mySite.apps.keyboards.urls') ),
+    url(r'^keyboards/', include('mySite.apps.keyboards.urls') ),
 ]
