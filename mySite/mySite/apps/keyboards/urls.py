@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from . import views
-
+from mySite.apps.keyboards import views
+# https://docs.djangoproject.com/en/1.8/topics/http/urls/
 urlpatterns = [
-    #url(r'/$', views.db_keyboard),
-    url(r'/keyboards/$', views.db_keyboard),
-    url(r'/(?P<pk>[0-9]+)/$', views.keyboard_detail),
+    url(r'^$', views.db_keyboard),
+    url(r'^keyboards_list/$', views.keyboard_list),
+    url(r'^keyboards_detail/(?P<pk>[0-9]+)/$', views.keyboard_detail),
 ]
