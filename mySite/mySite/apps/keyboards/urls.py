@@ -19,6 +19,7 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.db_keyboard),
-    url(r'^keyboards/$', views.db_keyboard),
+    #url(r'/$', views.db_keyboard),
+    url(r'/keyboards/$', views.db_keyboard),
+    url(r'/(?P<pk>[0-9]+)/$', views.keyboard_detail),
 ]
