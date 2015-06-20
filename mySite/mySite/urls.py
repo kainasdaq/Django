@@ -19,13 +19,16 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.hello),
-    url(r'^hello/$',views.hello),
-    url(r'^detail/(?P<my_args>\d{1,2})/$',views.detail, name='detail'),
-    url(r'^time/$',views.current_datetime, name='time'),
-    url(r'^time/plus/(\d{1,2})/$', views.hours_ahead, name='time_plus'),
-    url(r'^order/$', views.order_confirmation),
+    url( r'^admin/', include(admin.site.urls) ),
+    url( r'^$', views.hello ),
+    url( r'^hello/$',views.hello ),
+    url( r'^detail/(?P<my_args>\d{1,2})/$',views.detail, name='detail' ),
+    url( r'^time/$',views.current_datetime, name='time' ),
+    url( r'^time/plus/(\d{1,2})/$', views.hours_ahead, name='time_plus' ),
+    url( r'^order/$', views.order_confirmation ),
 
-    url(r'^keyboards/', include('mySite.apps.keyboards.urls') ),
+    url( r'^keyboards/', include('mySite.apps.keyboards.urls') ),
+    
+    url( r'^api-token-auth/', 'rest_framework_jwt.views.obtain_jwt_token' ),
+    url( r'^api-token-refresh/', 'rest_framework_jwt.views.refresh_jwt_token' ),
 ]
