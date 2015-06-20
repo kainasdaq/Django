@@ -11,3 +11,11 @@ CREATE TABLE keyboard (
 INSERT INTO keyboards_keyboard (name, type, color, price) VALUES ('Filco Ninja Majestouch-2','Mechanical','Black',145.8);
 INSERT INTO keyboards_keyboard (name, type, color, price) VALUES ('CM Storm QuickFire','Mechanical','Black',85.0);
 INSERT INTO keyboards_keyboard (name, type, color, price) VALUES ('Happy Hacking Keyboard Professional2','Electrostatic Capacitive','Gray',244.9);
+
+
+
+python manage.py runserver
+curl http://127.0.0.1:8000/keyboards/keyboards_list/
+curl http://127.0.0.1:8000/keyboards/keyboards_list/ -H 'Accept: application/json'
+curl http://127.0.0.1:8000/keyboards/keyboards_detail/1/
+curl http://127.0.0.1:8000/keyboards/keyboards_detail/1/ -H 'Accept: application/json'
