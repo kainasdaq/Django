@@ -16,9 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from . import views
-
+from mySite.apps.keyboards import views
+# https://docs.djangoproject.com/en/1.8/topics/http/urls/
 urlpatterns = [
-    url(r'^$', views.db_keyboard),
-    url(r'^keyboards/$', views.db_keyboard),
+    url( r'^$', views.db_keyboard ),
+    url( r'^keyboards_list/$', views.keyboard_list ),
+    url( r'^keyboards_detail/(?P<pk>[0-9]+)/$', views.keyboard_detail ),
+    
+    url( r'^keyboards_list_1/$', views.KeyboardList.as_view() ),
+    url( r'^keyboards_detail_1/(?P<pk>[0-9]+)/$', views.KeyboardDetail.as_view() ),
+    
+    url( r'^keyboards_list_2/$', views.KeyboardList_2.as_view() ),
+    url( r'^keyboards_detail_2/(?P<pk>[0-9]+)/$', views.KeyboardDetail_2.as_view() ),
 ]
