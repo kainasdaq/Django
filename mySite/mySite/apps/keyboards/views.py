@@ -1,4 +1,7 @@
+# keyboards/views.py
+
 from django.shortcuts import render, render_to_response
+from django.views.decorators.csrf import csrf_exempt # for test only
 import psycopg2 # PostgreSQL
 
 # for REST
@@ -9,6 +12,12 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+# for REST auth
+from django.contrib.auth.models import User
+from mySite.serializers import UserSerializer
+from rest_framework import permissions
+from mySite.apps.keyboards.permissions import IsOwnerOrReadOnly
 
 def db_keyboard(request):
     db = psycopg2.connect(user='kai', dbname='kai_db', password='zxcvbnm', host='localhost')
@@ -22,6 +31,7 @@ def db_keyboard(request):
 # function based views VS class based views
 
 # --- keyboard list ---
+'''
 @api_view(['GET', 'POST']) # function based view
 def keyboard_list(request, formate = None):
     if request.method == 'GET':
@@ -37,8 +47,15 @@ def keyboard_list(request, formate = None):
             return Response( serializer.data, status = status.HTTP_201_CREATED )
 
         return Response( serializer.errors, status = status.HTTP_400_BAD_REQUEST )
+'''
 
-class KeyboardList( APIView ): # class based view
+class KeyboardList( APIView ): # class based view, use this for POST
+    # REST auth
+    permission_classes = ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly )
+
+    def perform_create( self, serializer ):
+        serializer.save( owner = self.request.user )
+    
     def get( self, request, format = None ):
         keyboards = Keyboard.objects.all()
         serializer = KeyboardSerializer( keyboards, many = True )
@@ -47,16 +64,26 @@ class KeyboardList( APIView ): # class based view
     def post( self, request, format = None ):
         serializer = KeyboardSerializer( data = request.DATA )
         if serializer.is_valid():
+            self.perform_create( serializer ) ### IMPORTANT!!! ###
             serializer.save()
             return Response( serializer.data, status.HTTP_201_CREATED )
         return Response( serializer.errors, status = status.HTTP_400_BAD_REQUEST )
 
-class KeyboardList_2( generics.ListCreateAPIView ):
+'''
+class KeyboardList_2( generics.ListCreateAPIView ): # POST NOT ALLOWED
     queryset = Keyboard.objects.all()
     serializer_class = KeyboardSerializer
+    
+    # REST auth
+    permission_classes = ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly )
+
+    def perform_create( self, serializer ):
+        serializer.save( owner = self.request.user )
+'''
 
 # --- keyboard detail ---
 
+'''
 @api_view(['GET', 'POST', 'DELETE']) # function based view
 def keyboard_detail(request, pk, format = None):
     try:
@@ -78,8 +105,12 @@ def keyboard_detail(request, pk, format = None):
     elif request.method == 'DELETE':
         keyboard.delete()
         return Response( status = status.HTTP_204_NO_CONTENT )
+'''
 
-class KeyboardDetail( APIView ): # class based view
+class KeyboardDetail( APIView ): # class based view, use this for POST
+    # REST auth
+    permission_classes = ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly )
+    
     def get_object( self, pk ):
         try:
             return Keyboard.objects.get( pk = pk )
@@ -104,7 +135,12 @@ class KeyboardDetail( APIView ): # class based view
         keyboard.delete()
         return Response( status = status.HTTP_204_NO_CONTENT )
 
-class KeyboardDetail_2 ( generics.RetrieveUpdateDestroyAPIView ):
+'''
+class KeyboardDetail_2( generics.RetrieveUpdateDestroyAPIView ): # POST NOT ALLOWED
     queryset = Keyboard.objects.all()
     serializer_class = KeyboardSerializer
+
+    # REST auth
+    permission_classes = ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly )
+'''
 
