@@ -1,6 +1,9 @@
-#from django.forms import widgets
+# keyboards/serializers.py
+
 from rest_framework import serializers
 from mySite.apps.keyboards.models import Keyboard
+
+# =======================================================
 
 class KeyboardSerializer(serializers.ModelSerializer):
     '''
@@ -10,9 +13,11 @@ class KeyboardSerializer(serializers.ModelSerializer):
     color = serializers.CharField(max_length=25)
     price = serializers.DecimalField(max_digits=20, decimal_places=2)
     '''
+    owner = serializers.ReadOnlyField( source = 'owner.username' )
+
     class Meta:
         model = Keyboard
-        fields = ('id', 'name', 'type', 'color', 'price')
+        fields = ( 'id', 'name', 'type', 'color', 'price', 'owner' )
    
     '''
     def create(self, validated_data):
@@ -26,3 +31,4 @@ class KeyboardSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
     '''
+

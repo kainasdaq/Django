@@ -94,6 +94,11 @@ DATABASES = {
     }
 }
 
+# REST
+REST_FRAMEWORK = {
+    #'DEFAULT_PERMISSION_CLASSES': {}       
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

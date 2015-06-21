@@ -8,9 +8,14 @@ CREATE TABLE keyboard (
 );
 
 
-INSERT INTO keyboards_keyboard (name, type, color, price) VALUES ('Filco Ninja Majestouch-2','Mechanical','Black',145.8);
-INSERT INTO keyboards_keyboard (name, type, color, price) VALUES ('CM Storm QuickFire','Mechanical','Black',85.0);
-INSERT INTO keyboards_keyboard (name, type, color, price) VALUES ('Happy Hacking Keyboard Professional2','Electrostatic Capacitive','Gray',244.9);
+INSERT INTO keyboards_keyboard (name, type, color, price, owner_id, highlighted) 
+ VALUES ('Filco Ninja Majestouch-2','Mechanical','Black',145.8, 1, 'cool');
+
+INSERT INTO keyboards_keyboard (name, type, color, price, owner_id, highlighted)
+ VALUES ('CM Storm QuickFire','Mechanical','Black',85.0, 1, '');
+ 
+INSERT INTO keyboards_keyboard (name, type, color, price, owner_id, highlighted)
+ VALUES ('Happy Hacking Keyboard Professional2','Electrostatic Capacitive','Gray',244.9, 2, 'fancy');
 
 
 
@@ -19,3 +24,11 @@ curl http://127.0.0.1:8000/keyboards/keyboards_list/
 curl http://127.0.0.1:8000/keyboards/keyboards_list/ -H 'Accept: application/json'
 curl http://127.0.0.1:8000/keyboards/keyboards_detail/1/
 curl http://127.0.0.1:8000/keyboards/keyboards_detail/1/ -H 'Accept: application/json'
+
+# REST auth
+Auth not provided:
+http POST http://127.0.0.1:8000/keyboards/keyboards_list/ name="test" type="E" color="Blue" price="15.5" highlighted="fake"
+Auth passed:
+http -a kai:zxcvbnm POST http://127.0.0.1:8000/keyboards/keyboards_list/ name="test" highlighted="fake"
+
+curl -X POST http://127.0.0.1:8000/keyboards/keyboards_list/ -d name="test" highlighted="fake" -u kai:zxcvbnm
