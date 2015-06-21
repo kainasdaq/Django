@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 
 # for REST auth
 from django.contrib.auth.models import User
-from mySite.serializers import UserSerializer
+from mySite.apps.token_demo.serializers import UserSerializer
 from rest_framework import permissions
 from mySite.apps.keyboards.permissions import IsOwnerOrReadOnly
 
@@ -143,4 +143,5 @@ class KeyboardDetail_2( generics.RetrieveUpdateDestroyAPIView ): # POST NOT ALLO
     # REST auth
     permission_classes = ( permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly )
 '''
+
 

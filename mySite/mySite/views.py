@@ -4,11 +4,6 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, render_to_response
 import datetime
 
-# REST auth
-from rest_framework import generics
-from django.contrib.auth.models import User
-from mySite.serializers import UserSerializer
-
 # =====================================================
 
 def hello(request):
@@ -58,13 +53,4 @@ def order_confirmation(request):
     # when using locals(), local variables' names must match those var in the template!
     #return render_to_response( 'order_confirmation.html', locals() )
     return render(request, 'order_confirmation.html', locals())
-
-# REST auth
-class UserList( generics.ListAPIView ):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class UserDetail( generics.RetrieveAPIView ):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 

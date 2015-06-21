@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'mySite.apps.keyboards',
+    'mySite.apps.token_demo',
 )
 
 MIDDLEWARE_CLASSES = (
