@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^order/$', views.order_confirmation),
 
     url(r'^keyboards/', include('mySite.apps.keyboards.urls')),
+    
     # auth.user 
     url(r'^users/$', views.UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
