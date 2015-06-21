@@ -32,3 +32,9 @@ Auth passed:
 http -a kai:zxcvbnm POST http://127.0.0.1:8000/keyboards/keyboards_list/ name="test" highlighted="fake"
 
 curl -X POST http://127.0.0.1:8000/keyboards/keyboards_list/ -d name="test" highlighted="fake" -u kai:zxcvbnm
+
+# REST JWT auth
+Get token
+http -f POST http://127.0.0.1:8000/api-token-auth/ username=kai password=zxcvbnm
+
+http -f POST http://127.0.0.1:8000/api-token-refresh/ token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImthaSIsInVzZXJfaWQiOjEsImVtYWlsIjoia0BtYWlkZ2VuY3kuY29tIiwiZXhwIjoxNDM0OTE3MjkzfQ.t3SN5v48stdIw80G4qda2Ebw6BdVsFbpzcA4K50PdzQ
