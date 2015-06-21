@@ -21,7 +21,9 @@ class Keyboard(models.Model):
     price = models.DecimalField( max_digits = 20, decimal_places = 2, default = 0.0)
     
     # ch.4 auth & permissions
-    owner = models.ForeignKey('auth.User', related_name = 'owner_keyboards' )
+    # fields = ( 'id', 'username', 'keyboards' ) from UserSerializer
+    ### related_name must match fields name !!! ###
+    owner = models.ForeignKey('auth.User', related_name = 'keyboards' )  
     highlighted = models.TextField(blank = True, default = '')
     
     class Meta:
