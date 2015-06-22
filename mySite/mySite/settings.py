@@ -109,6 +109,14 @@ REST_FRAMEWORK = {
     ),
 }
 
+# JWT
+import datetime
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta( seconds = 900 ),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta( days = 30 ),
+}
+
 # Redirect after login
 #LOGIN_REDIRECT_URL = '/token-demo/users-open/'
 

@@ -13,9 +13,14 @@ http -a kai:zxcvbnm POST http://127.0.0.1:8000/keyboards/keyboards_list/ name="t
 curl -X POST http://127.0.0.1:8000/keyboards/keyboards_list/ -d name="test" highlighted="fake" -u kai:zxcvbnm
 
 # REST JWT auth
-Get token
+Get token (PASS)
 http -f POST http://127.0.0.1:8000/token-demo/api-token-auth/ username=kai password=zxcvbnm
+curl -X POST -d "username=k&password=zxcvbnm" http://127.0.0.1:8000/token-demo/api-token-auth/
 
-http -f POST http://127.0.0.1:8000/token-demo/users-restricted/ token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImthaSIsInVzZXJfaWQiOjEsImVtYWlsIjoia0BtYWlkZ2VuY3kuY29tIiwiZXhwIjoxNDM0OTM3MTU1fQ.frL9w232tlufw85gH2rbQObZH5J5wlUwacAuzQ_fSMM
+Access restricted endpoint (PASS)
+curl -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImsiLCJvcmlnX2lhdCI6MTQzNDk1NDAzNiwidXNlcl9pZCI6MiwiZW1haWwiOiJrQG1haWRnZW5jeS5jb20iLCJleHAiOjE0MzQ5NTQ5MzZ9.OPwzzepmoVbbff1qU4UIPK0zLqBg5-PemKgyU2ib43s" http://127.0.0.1:8000/token-demo/users-restricted/
 
-http -f POST http://127.0.0.1:8000/api-token-refresh/ token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImthaSIsInVzZXJfaWQiOjEsImVtYWlsIjoia0BtYWlkZ2VuY3kuY29tIiwiZXhwIjoxNDM0OTE3MjkzfQ.t3SN5v48stdIw80G4qda2Ebw6BdVsFbpzcA4K50PdzQ
+Refresh token (PASS)
+curl -X POST -H "Content-Type: application/json" -d '{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImsiLCJvcmlnX2lhdCI6MTQzNDk1NDAzNiwidXNlcl9pZCI6MiwiZW1haWwiOiJrQG1haWRnZW5jeS5jb20iLCJleHAiOjE0MzQ5NTQ5MzZ9.OPwzzepmoVbbff1qU4UIPK0zLqBg5-PemKgyU2ib43s"}' http://127.0.0.1:8000/token-demo/api-token-refresh/
+
+
