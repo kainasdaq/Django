@@ -99,7 +99,8 @@ DATABASES = {
 REST_FRAMEWORK = {
     # must be '(' and ')'
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        #'rest_framework.permissions.IsAuthenticated', # CANNOT read data without login
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly', # CAN read data without login
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
