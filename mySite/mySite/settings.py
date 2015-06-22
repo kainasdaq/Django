@@ -108,6 +108,9 @@ REST_FRAMEWORK = {
     ),
 }
 
+# Redirect after login
+#LOGIN_REDIRECT_URL = '/token-demo/users-open/'
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
