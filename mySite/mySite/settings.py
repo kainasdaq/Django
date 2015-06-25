@@ -36,12 +36,16 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'rest_framework',
+    'corsheaders',
     'mySite.apps.keyboards',
     'mySite.apps.token_demo',
 )
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware', # it needs to come before django CommonMiddleware
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -112,10 +116,14 @@ REST_FRAMEWORK = {
 # JWT
 import datetime
 JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta( seconds = 900 ),
     'JWT_ALLOW_REFRESH': True,
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta( days = 30 ),
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=30), # doesn't really work
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=900), # 15 minutes
 }
+
+# django-cors-headers config
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/token-demo/.*$'
 
 # Redirect after login
 #LOGIN_REDIRECT_URL = '/token-demo/users-open/'

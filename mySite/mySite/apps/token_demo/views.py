@@ -25,7 +25,8 @@ class UserDetail( generics.RetrieveAPIView ):
 
 # ======= REST JWT auth ======
 class RestrictedUserList(APIView):
-    permission_classes = ( IsAuthenticatedOrReadOnly, )
+    #permission_classes = ( IsAuthenticatedOrReadOnly, )
+    permission_classes = ( IsAuthenticated, )
     authentication_classes = ( JSONWebTokenAuthentication, )
                 
     def get( self, request, format = None ):
@@ -43,7 +44,8 @@ class RestrictedUserList(APIView):
         '''
 
 class RestrictedUserDetail(APIView):
-    permission_classes = ( IsAuthenticatedOrReadOnly, )
+    #permission_classes = ( IsAuthenticatedOrReadOnly, )
+    permission_classes = ( IsAuthenticated, )
     authentication_classes = ( JSONWebTokenAuthentication, )
                 
     def get_object( self, pk ):
