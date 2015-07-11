@@ -21,6 +21,7 @@ from mySite import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    
     url(r'^$', views.hello),
     url(r'^hello/$', views.hello),
     url(r'^detail/(?P<my_args>\d{1,2})/$', views.detail, name = 'detail'),
